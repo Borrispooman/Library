@@ -10,7 +10,6 @@ function Book(title, author, pages, read){
         this.info = function(){
             return(`${this.title} by ${this.author}, ${this.pages} pages, ${this.readString}`)
         }
-        this.isDisplayed = true;
         
     }
     
@@ -23,36 +22,46 @@ function addBookToLibrary(title, author, pages, read){
 }
 
 function displayLibrary(){
-    for (let i = 0; i < myLibrary.length; i++){
+    for (let i = 0; i < myLibrary.length;){
 
-        const newDiv = document.createElement("div")
-        newDiv.className = "bookCard";
+        if (myLibrary[i].isDisplayed === true) {
+            i++;
+        }
 
-        const title = document.createElement("div")
-        title.textContent = `Title: ${myLibrary[i].title}`
+        else{
+            const newDiv = document.createElement("div")
+            newDiv.className = "bookCard";
 
-        const author = document.createElement("div")
-        author.textContent = `Author: ${myLibrary[i].author}`
+            const title = document.createElement("div")
+            title.textContent = `Title: ${myLibrary[i].title}`
 
-        const pages = document.createElement("div")
-        pages.textContent = `Pages: ${myLibrary[i].pages}`
+            const author = document.createElement("div")
+            author.textContent = `Author: ${myLibrary[i].author}`
 
-        const status = document.createElement("div")
-        status.textContent = `Status: ${myLibrary[i].readString}`
+            const pages = document.createElement("div")
+            pages.textContent = `Pages: ${myLibrary[i].pages}`
 
-        newDiv.append(title, author, pages, status);
+            const status = document.createElement("div")
+            status.textContent = `Status: ${myLibrary[i].readString}`
 
-        const newDivContainer = document.createElement("div");
+            newDiv.append(title, author, pages, status);
 
-        newDivContainer.className = "grid-item-container"
+            const newDivContainer = document.createElement("div");
 
-        newDivContainer.append(newDiv);
+            newDivContainer.className = "grid-item-container"
 
-        mainContent = document.getElementById("main");
+            newDivContainer.append(newDiv);
 
-        addBook = document.getElementById("add-book-container");
+            mainContent = document.getElementById("main");
 
-        mainContent.insertBefore(newDivContainer, addBook);
+            addBook = document.getElementById("add-book-container");
+
+            mainContent.insertBefore(newDivContainer, addBook);
+
+            myLibrary[i].isDisplayed = true;
+
+            i++;
+        }
     }
 }
 
