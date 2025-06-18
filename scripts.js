@@ -10,6 +10,8 @@ function Book(title, author, pages, read){
         this.info = function(){
             return(`${this.title} by ${this.author}, ${this.pages} pages, ${this.readString}`)
         }
+        this.isDisplayed = true;
+        
     }
     
     Book.prototype.info = function(){
@@ -22,6 +24,7 @@ function addBookToLibrary(title, author, pages, read){
 
 function displayLibrary(){
     for (let i = 0; i < myLibrary.length; i++){
+
         const newDiv = document.createElement("div")
         newDiv.className = "bookCard";
 
@@ -55,5 +58,41 @@ function displayLibrary(){
 
 addBookToLibrary("Boy swollows universe", "Trent Dalton", 450, false);
 
-displayLibrary();
+
+const dialog = document.getElementById("add-book-dialog") 
+const closeBtn = document.getElementById("close") 
+const openBtn = document.getElementById("add-book-button")
+
+openBtn.addEventListener("click", () => {
+   dialog.showModal(); 
+})
+
+closeBtn.addEventListener("click", () => {
+    dialog.close();
+})
+
+
+
+const form = document.getElementById("new-book-details")
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+    
+    const newTitle = document.getElementById("new-title").value;
+    const newAuthor = document.getElementById("new-author").value;
+    const newPages = document.getElementById("new-pages").value;
+    const status = document.querySelector("input[name='choice']:checked").value === "true";
+
+    addBookToLibrary(newTitle, newAuthor, newPages, status);
+
+    displayLibrary();
+
+    dialog.close();
+
+
+
+
+
+});
+
 
