@@ -1,16 +1,3 @@
-async function fetchBookCover(title) {
-    const query = encodeURIComponent(title);
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${query}`);
-    const data = await response.json();
-
-    if (data.totalItems > 0) {
-        const thumbnail = data.items[0].volumeInfo.imageLinks?.thumbnail;
-        return thumbnail || null;
-    }
-
-    return null;
-}
-
 const myLibrary = []
 
 function Book(title, author, pages, read){
@@ -19,7 +6,7 @@ function Book(title, author, pages, read){
         this.pages = pages;
         this.id = crypto.randomUUID(); 
         this.read = read;
-        this.readString = (this.read == true) ? "read" : "not read yet"
+        this.readString = (this.read == true) ? "Read" : "Not read yet"
         this.isDisplayed = false
         
     }
@@ -98,30 +85,14 @@ function createBookDisplayCard(i){
         console.log("im here")
     })
                                      
-
-
-
-
-
-
     const delButton = document.createElement("button");
     delButton.className = "delete-book";
+    delButton.textContent = "Remove"
     delButton.id = myLibrary[i].id
 
     delButton.addEventListener("click", () => {
         deleteBookById(newDiv.id);
     })
-
-    fetchBookCover(myLibrary[i].title)
-    .then(imageUrl => {
-        if (imageUrl) {
-            const img = document.createElement("img");
-            img.src = imageUrl;
-            newDiv.append(img);
-        } else {
-            console.log("No image found.");
-        }
-    });
 
     newDiv.append(title, author, pages, status, statusToggle, delButton);
 
