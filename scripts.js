@@ -47,7 +47,7 @@ function updateReadStatusById(divID, statusID){
             myLibrary[i].changeReadStatus();
             const status = document.getElementById(`${statusID}`)
             
-            status.textContent = `Status: ${myLibrary[i].read == true ? "not read yet" : "read"}`;
+            status.textContent = `Status: ${myLibrary[i].read == true ? "Not read yet" : "Read"}`;
             console.log("yep")
         }
     }
@@ -124,7 +124,6 @@ function displayLibrary(){
     }
 }
 
-addBookToLibrary("Boy swollows universe", "Trent Dalton", 450, false);
 
 
 const dialog = document.getElementById("add-book-dialog") 
@@ -162,6 +161,3 @@ form.addEventListener("submit", function(e){
 
 
 });
-
-
-displayLibrary();
