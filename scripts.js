@@ -96,17 +96,11 @@ function createBookDisplayCard(i){
 
     newDiv.append(title, author, pages, status, statusToggle, delButton);
 
-    const newDivContainer = document.createElement("div");
-
-    newDivContainer.className = "grid-item-container"
-
-    newDivContainer.append(newDiv);
-
     mainContent = document.getElementById("main");
 
     addBook = document.getElementById("add-book-container");
 
-    mainContent.append(newDivContainer);
+    mainContent.append(newDiv);
 
     myLibrary[i].isDisplayed = true;
 }
@@ -155,9 +149,4 @@ form.addEventListener("submit", function(e){
     displayLibrary();
 
     dialog.close();
-
-
-
-
-
 });
